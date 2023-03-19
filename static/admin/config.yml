@@ -1,0 +1,71 @@
+backend:
+  name: git-gateway
+  branch: main  
+# when using the default proxy server port
+media_folder: "static/images" # Folder where user uploaded files should go
+public_folder: "images"
+collections:
+  - name: "home"
+    label: "Home Page"
+    folder: "content"
+    path: "_index"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime"}
+  - name: "product"
+    label: "Product Page"
+    folder: "content/products"
+    path: "{{slug}}/index"
+    media_folder: "" # Save images in the post's own folder instead of the static folder
+    public_folder: ""    
+    create: true
+    fields:
+      - { label: "Product ID", name: "productId", widget: "uuid"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime"}
+      - { label: "Meta Description", name: "metaDescription", widget: "string" }      
+      - { label: "Product Price", name: "price", widget: "string" }      
+      - { label: "Price Before", name: "priceBefore", widget: "string" }
+      - { label: "Product Short Description", name: "productShortDescription", widget: "string" }
+      - { label: "Stock", name: "stock", widget: "boolean", default: true}
+      - {
+          label: "Product Images",
+          name: "productImages",
+          widget: "object",
+          fields:
+            [{ label: "Product Image 1", name: "productImage1", widget: "image"},
+            { label: "Product Image 2", name: "productImage2", widget: "image", required: false},
+            { label: "Product Image 3", name: "productImage3", widget: "image", required: false},
+            { label: "Product Image 4", name: "productImage4", widget: "image", required: false},
+            { label: "Product Image 5", name: "productImage5", widget: "image", required: false},
+            { label: "Product Image 6", name: "productImage6", widget: "image", required: false}
+            ]
+        }
+      - {
+          label: "Colors",
+          name: "colors",
+          widget: "object",
+          fields:
+            [{ label: "Color 1", name: "color1", widget: "color", required: false },
+            { label: "Color 2", name: "color2", widget: "color", required: false },
+            { label: "Color 3", name: "color3", widget: "color", required: false }
+            ]
+        }
+      - {
+          label: "Sizes",
+          name: "sizes",
+          widget: "object",
+          fields:
+            [{ label: "Size 1", name: "size1", widget: "string", required: false },
+            { label: "Size 2", name: "size2", widget: "string", required: false },
+            { label: "Size 3", name: "size3", widget: "string", required: false },
+            { label: "Size 4", name: "size4", widget: "string", required: false },
+            { label: "Size 5", name: "size5", widget: "string", required: false },
+            { label: "Size 6", name: "size6", widget: "string", required: false }
+            ]
+        }
+      - { label: "Best Sellers", name: "bestSellers", widget: "boolean", default: false}
+      - { label: "Specifications", name: "specifications", widget: "string", required: false }
+      - { label: "Care & Maintenance", name: "careAndMaintenance", widget: "string", required: false }
+      - { label: "Types", name: "types", widget: "hidden", default: "Products"}
+      

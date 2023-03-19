@@ -1,0 +1,8 @@
+    <!-- JS
+============================================ -->
+	{{ range .Site.Params.custom_js }}
+	<script src='{{ printf "%s" . | absURL }}'></script>
+	{{ end }}
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+{{ partial "header" .  }}
+    <main class="main-wrapper bg-vista-white">
+        <!-- Start Breadcrumb Area  -->
+        <div class="axil-breadcrumb-area pt-3 pb-0">
+            <div class="container m-3">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="inner">
+                            <ul class="axil-breadcrumb">
+                                <li class="axil-breadcrumb-item"><a href="{{ .Site.BaseURL }}">Home</a></li>
+                                <li class="separator"></li>
+                                <li class="axil-breadcrumb-item active" aria-current="page">Produk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Breadcrumb Area  -->
+        <!-- Start Shop Area  -->
+        <div class="axil-shop-area axil-section-gap">
+            <div class="container">
+                <div class="row row--15">
+				{{/* - $sortedPages := .Pages.ByParam "price" }}
+				{{ $paginator := .Paginate $sortedPages }}
+				{{- range $index, $page := $paginator.Pages  */}} 
+					{{ range .Data.Pages.ByDate.Reverse }}
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="axil-product product-style-one has-color-pick mt--40">
+                            <div class="thumbnail">
+								{{ $href := printf "%s" .Params.slug | printf "%s%s" "/" | printf "%s%s" "products" | absURL | printf "%s" }}
+								<a href="{{ $href }}">
+									{{ $image := printf "%s" .Params.productImages.productImage1 | printf "%s%s" "/" | printf "%s%s" .Params.slug | printf "%s%s" "/" | printf "%s%s" "products" | absURL | printf "%s" }}
+									<img src="{{ $image }}" alt="Product Images">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <div class="inner">
+                                    <h5 class="title"><a href="detail.html">{{ .Params.title }}</a></h5>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">{{ .Params.price }}</span>
+                                        <span class="price old-price">{{ .Params.priceBefore }}</span>
+                                    </div>
+									{{ if isset .Params "colors" }}
+                                    <div class="color-variant-wrapper">
+                                        <ul class="color-variant">
+											{{ range .Params.colors }}
+											<li class="color-extra-01"><span><span class="color" style="background:{{ . }}"></span></span></li>
+											{{ end }}
+										</ul>
+									</div>
+									{{ end }}									
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product  -->
+					{{ end }}
+                </div>
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End Shop Area  -->
+    </main>
+{{ partial "footer" . }}
